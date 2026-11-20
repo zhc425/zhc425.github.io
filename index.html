@@ -1,6 +1,183 @@
 ---
-layout: default
+layout: null
 ---
-<section class="profile"><div class="profile-top"><img class="avatar avatar-profile" src="{{ '/assets/avatar.png' | relative_url }}" alt="zhc425 的头像" width="76" height="76"><a class="profile-link" href="https://github.com/zhc425">GitHub ↗</a></div><h1>zhc425</h1><p class="profile-handle">@zhc425</p><p class="bio">记录生活、想法，和偶尔想留下的片刻。</p><p class="profile-note">这里没有固定主题，想到什么就写什么。</p></section>
-<nav class="tabs" aria-label="内容分类"><button class="tab active" data-filter="全部" aria-pressed="true">全部</button><button class="tab" data-filter="随笔" aria-pressed="false">随笔</button><button class="tab" data-filter="日记" aria-pressed="false">日记</button><button class="tab" data-filter="读书" aria-pressed="false">读书</button><button class="tab" data-filter="碎碎念" aria-pressed="false">碎碎念</button></nav>
-<section class="feed" aria-label="动态时间线">{% for post in site.posts %}<article class="feed-item" data-category="{{ post.category | escape }}"><img class="avatar feed-avatar" src="{{ '/assets/avatar.png' | relative_url }}" alt="" width="44" height="44" loading="lazy"><div class="feed-content"><div class="feed-meta"><strong>zhc425</strong><span class="handle">@zhc425</span><span aria-hidden="true">·</span><a href="{{ post.url | relative_url }}" aria-label="查看 {{ post.date | date: '%Y年%m月%d日' }}的动态"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y.%m.%d' }}</time></a></div>{% if post.type == 'note' %}<div class="prose note-body">{{ post.content }}</div>{% else %}<h2 class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h2>{% if post.summary %}<p class="post-summary">{{ post.summary | escape }}</p>{% else %}<p class="post-summary">{{ post.excerpt | strip_html | truncate: 150 }}</p>{% endif %}<a class="read-more" href="{{ post.url | relative_url }}">阅读全文 <span aria-hidden="true">↗</span></a>{% endif %}<div class="feed-bottom"><span>{{ post.category | escape }}</span><a href="{{ post.url | relative_url }}">永久链接 ↗</a></div></div></article>{% endfor %}<p class="empty" hidden>这个分类还没有内容。</p></section>
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>账号星图 Atlas 安装图解：安卓和 iPhone 都能装</title>
+<meta name="description" content="因为没上应用商店，确实比点一下“获取”麻烦一点。这篇就一步一步、带图讲清楚。整个 App 免费、没广告，放心装。">
+<meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151517" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/avatar.png">
+<style>
+:root{
+  --bg:#f7f7f5;--card:#ffffff;--text:#1d1d1f;--muted:#6e6e73;--line:#e5e5ea;
+  --accent:#2f6fed;--accent-soft:#eaf1ff;--tip:#fff8e6;--tip-line:#f2c94c;
+  --radius:16px;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#151517;--card:#1f1f22;--text:#ececef;--muted:#9a9aa2;--line:#2e2e33;
+  --accent:#6b9bff;--accent-soft:#1c2740;--tip:#2a2516;--tip-line:#a88a2c;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+  font-size:17px;line-height:1.85;letter-spacing:.01em}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+header.hero{padding:56px 0 28px}
+.meta{color:var(--muted);font-size:14px;margin-bottom:10px}
+h1{font-size:clamp(26px,5.5vw,36px);line-height:1.3;margin:0 0 12px;font-weight:700}
+article{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(20px,5vw,44px);margin-bottom:40px}
+h2{font-size:24px;margin:2.2em 0 .6em;padding-top:.4em;border-top:1px solid var(--line);scroll-margin-top:16px}
+h2:first-of-type{margin-top:1.4em}
+h3{font-size:19px;margin:1.8em 0 .5em;scroll-margin-top:16px}
+h4{font-size:17px;margin:1.6em 0 .4em;scroll-margin-top:16px}
+p{margin:.7em 0}
+ul{padding-left:1.3em;margin:.6em 0}
+li{margin:.3em 0}
+code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.88em;background:var(--accent-soft);padding:.1em .4em;border-radius:6px}
+figure{margin:1.2em 0 1.6em}
+figure img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:var(--bg)}
+figcaption{text-align:center;color:var(--muted);font-size:13px;margin-top:8px}
+blockquote{margin:1.4em 0;padding:14px 18px;background:var(--tip);border-left:4px solid var(--tip-line);border-radius:10px}
+blockquote p{margin:0}
+.dl{margin:1.2em 0 1.6em;padding:18px;border-radius:14px;background:var(--accent-soft);text-align:center}
+.btn{display:inline-block;background:var(--accent);color:#fff;font-weight:600;padding:12px 22px;border-radius:999px;font-size:16px}
+.btn:hover{text-decoration:none;opacity:.92}
+.dl small{display:block;color:var(--muted);font-size:13px;margin-top:10px;line-height:1.6}
+.table-wrap{overflow-x:auto;margin:1em 0;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+thead th{background:var(--accent-soft)}
+tbody th{font-weight:600;white-space:nowrap}
+.faq p strong{display:block}
+hr{border:0;border-top:1px solid var(--line);margin:2em 0}
+footer{color:var(--muted);font-size:13px;text-align:center;padding:0 0 40px}
+@media (max-width:520px){body{font-size:16px}header.hero{padding:36px 0 20px}article{border-radius:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="meta">2026年11月20日 · 2.2k 字 · 19 分钟</div>
+  <h1>账号星图 Atlas 安装图解：安卓和 iPhone 都能装</h1>
+</header>
+
+<article>
+<p>上一篇 <a href="https://huichen.dev/2026/11/20/technology/%E6%88%91%E5%81%9A%E4%BA%86%E4%B8%80%E4%B8%AA%E8%AE%B0%E8%B4%A6%E5%8F%B7%E7%9A%84App%EF%BC%9A%E8%B4%A6%E5%8F%B7%E6%98%9F%E5%9B%BEAtlas/">我做了一个记账号的App：账号星图 Atlas</a></p>
+
+<p>因为没上应用商店，确实比点一下“获取”麻烦一点。这篇就一步一步、带图讲清楚。整个 App <strong>免费、没广告</strong>，放心装。</p>
+
+<p>先找到你的手机：</p>
+<ul>
+  <li><strong>安卓</strong>：直接下载 APK 安装，三分钟搞定 👉 <a href="#android">跳到安卓</a></li>
+  <li><strong>iPhone</strong>：最省事是把网页版添加到主屏幕；想要原生版就得借电脑自签一下 👉 <a href="#iPhone">跳到 iPhone</a></li>
+</ul>
+
+<h2 id="android">安卓手机</h2>
+<div class="dl">
+  <a class="btn" href="https://huichen.dev/downloads/Atlas.apk">⬇ 下载安卓版 Atlas.apk（3.55 MB）</a>
+  <small>安卓 8.0 及以上 · 当前版本 v2.0-r18 · 下载慢可以走 <a href="https://github.com/Ckxkx/account-atlas/releases/latest">GitHub Releases 备用链接</a></small>
+</div>
+
+<h3 id="a1">第 1 步：下载，点“仍然下载”</h3>
+<p>点上面的按钮。浏览器会提示“此类文件可能会损害设备”——所有不是从应用商店来的 APK 都会弹这个，点 <strong>“仍然下载”</strong> 就行。</p>
+<p>在微信、QQ 里点链接是下不了的，先点右上角“⋯”，选 <strong>“在浏览器打开”</strong>。</p>
+<figure><img src="/assets/atlas/android-1-download.webp" alt="第1步：仍然下载" width="1000" height="680" loading="lazy"><figcaption>第1步：仍然下载</figcaption></figure>
+
+<h3 id="a2">第 2 步：打开下载好的文件</h3>
+<p>下载完通知栏会有提示，直接点它。找不到的话，去浏览器的“下载内容”，或者文件管理的 <strong>“下载 / Download”</strong> 文件夹，点 <code>Atlas.apk</code>。</p>
+<figure><img src="/assets/atlas/android-2-open.webp" alt="第2步：打开 APK" width="1000" height="680" loading="lazy"><figcaption>第2步：打开 APK</figcaption></figure>
+
+<h3 id="a3">第 3 步：允许“安装未知应用”</h3>
+<p>第一次装 APK，系统会拦一下。点弹窗里的 <strong>“设置”</strong>，把当前这个浏览器（或者文件管理）的 <strong>“允许来自此来源的应用”</strong> 打开，再按返回。</p>
+<p>不同牌子的手机会多一道关：</p>
+<ul>
+  <li><strong>小米 / HyperOS</strong>：会弹“风险提示”或要求联网扫描，勾选“我已知晓风险”，点继续安装。</li>
+  <li><strong>华为 / 鸿蒙</strong>：纯净模式开着会直接拦截。设置里搜 <strong>“纯净模式”</strong>，先关掉（装完可以再开回去）。</li>
+  <li><strong>OPPO / vivo</strong>：可能要你验证账号密码，或者点 <strong>“继续安装”</strong>、“无视风险安装”。</li>
+</ul>
+<figure><img src="/assets/atlas/android-3-unknown-apps.webp" alt="第3步：允许安装未知应用" width="1000" height="680" loading="lazy"><figcaption>第3步：允许安装未知应用</figcaption></figure>
+
+<h3 id="a4">第 4 步：安装，打开</h3>
+<p>回到安装界面点 <strong>“安装”</strong>，几秒就好。装完点“打开”，或者去桌面找 <strong>账号星图</strong> 的图标。</p>
+<figure><img src="/assets/atlas/android-4-install.webp" alt="第4步：安装" width="1000" height="680" loading="lazy"><figcaption>第4步：安装</figcaption></figure>
+
+<blockquote><p>安装包一直用同一个签名密钥签的。以后出新版本，直接下载新的 APK <strong>覆盖安装</strong>就行，不用卸载，数据也都还在。</p></blockquote>
+
+<h2 id="iPhone">iPhone</h2>
+<p>iPhone 有两条路，按自己情况选：</p>
+<div class="table-wrap"><table>
+  <thead><tr><th></th><th>方法一：网页版添加到主屏幕</th><th>方法二：原生 App（IPA 自签）</th></tr></thead>
+  <tbody>
+    <tr><th>要不要电脑</th><td>不用</td><td>要（Windows / Mac 都行）</td></tr>
+    <tr><th>难度</th><td>⭐</td><td>⭐⭐⭐</td></tr>
+    <tr><th>体验</th><td>全屏、能离线，跟 App 很像</td><td>原生动画和触感反馈更顺</td></tr>
+    <tr><th>麻烦的地方</th><td>没有</td><td>免费 Apple ID 签名 7 天过期，要重签</td></tr>
+  </tbody>
+</table></div>
+<p>不想折腾就选方法一，功能是一样的。</p>
+
+<h3 id="m1">方法一：网页版添加到主屏幕（推荐，不用电脑）</h3>
+<p><strong>1. 用 Safari 打开</strong> <a href="https://huichen.dev/account-atlas/">huichen.dev/account-atlas</a>。iOS 26 点右下角的 <strong>“⋯”</strong>，再点“分享”；旧版本直接点底部的分享按钮（方框加向上箭头）。</p>
+<figure><img src="/assets/atlas/iphone-web-1-safari.webp" alt="方法一第1步：Safari 打开网页版" width="1000" height="680" loading="lazy"><figcaption>方法一第1步：Safari 打开网页版</figcaption></figure>
+<p><strong>2. 往下滑，点“添加到主屏幕”。</strong></p>
+<figure><img src="/assets/atlas/iphone-web-2-share.webp" alt="方法一第2步：添加到主屏幕" width="1000" height="680" loading="lazy"><figcaption>方法一第2步：添加到主屏幕</figcaption></figure>
+<p><strong>3. 点右上角“添加”。</strong> 桌面就多了一个账号星图，点开是全屏的，断网也能用。</p>
+<figure><img src="/assets/atlas/iphone-web-3-add.webp" alt="方法一第3步：点添加" width="1000" height="680" loading="lazy"><figcaption>方法一第3步：点添加</figcaption></figure>
+
+<h3 id="m2">方法二：安装原生版 IPA（需要电脑）</h3>
+<div class="dl">
+  <a class="btn" href="https://huichen.dev/downloads/Atlas.ipa">⬇ 下载 iPhone 原生版 Atlas.ipa（3.7 MB）</a>
+  <small>需要 iOS 17 及以上 · 未签名，需自签安装 · 备用：<a href="https://github.com/Ckxkx/account-atlas/releases/latest">GitHub Releases</a></small>
+</div>
+<p>这个 IPA 是 <strong>没签名</strong> 的（我没交苹果每年 99 美元的开发者费 😂），所以要用你自己的 Apple ID 签一下再装。建议注册一个小号 Apple ID 专门用来签名。</p>
+
+<h4 id="m2-1">第 1 步：在电脑上签名并安装</h4>
+<p>最省心的是 <strong>爱思助手</strong>（Windows / Mac 都有）。手机用数据线连上电脑，然后：</p>
+<ul>
+  <li>顶部点 <strong>工具箱</strong></li>
+  <li>点 <strong>IPA签名</strong></li>
+  <li><strong>添加 IPA</strong>，选刚下载的 <code>Atlas.ipa</code></li>
+  <li>选 <strong>“使用 Apple ID 签名”</strong>，登录你的 Apple ID</li>
+  <li>点 <strong>开始签名</strong>，签好后在“我的设备 → 应用游戏 → 导入安装”里装到手机</li>
+</ul>
+<figure><img src="/assets/atlas/iphone-ipa-1-i4-sign.webp" alt="方法二第1步：爱思助手 IPA 签名" width="1000" height="680" loading="lazy"><figcaption>方法二第1步：爱思助手 IPA 签名</figcaption></figure>
+<p>不想装爱思的话，也可以用 <a href="https://sideloadly.io/">Sideloadly</a>：把 IPA 拖进去，填 Apple ID，点 Start，一步装完。</p>
+
+<h4 id="m2-2">第 2 步：信任开发者</h4>
+<p>装好第一次点开，会提示“不受信任的开发者”。去 <strong>设置 → 通用 → VPN与设备管理</strong>，点你的 Apple ID 那一项，再点 <strong>“信任”</strong>。</p>
+<figure><img src="/assets/atlas/iphone-ipa-2-trust.webp" alt="方法二第2步：信任开发者" width="1000" height="680" loading="lazy"><figcaption>方法二第2步：信任开发者</figcaption></figure>
+
+<h4 id="m2-3">第 3 步：打开开发者模式</h4>
+<p>iOS 16 及以上还要多一步：<strong>设置 → 隐私与安全性 → 拉到最底 → 开发者模式</strong>，打开后按提示重启，解锁后再选一次“打开”。</p>
+<figure><img src="/assets/atlas/iphone-ipa-3-devmode.webp" alt="方法二第3步：开发者模式" width="1000" height="680" loading="lazy"><figcaption>方法二第3步：开发者模式</figcaption></figure>
+
+<blockquote><p>⚠️ <strong>7 天有效期</strong>：免费 Apple ID 签出来的 App 只能用 7 天，过期后点开会闪退，用爱思重新签一遍、覆盖安装就好，数据不会丢。嫌麻烦的话可以用 <a href="https://sidestore.io/">SideStore</a>，它能在手机上自动续签。</p></blockquote>
+
+<h2 id="preview">装好之后长这样</h2>
+<figure><img src="/assets/atlas/installed-preview.webp" alt="安装好之后的样子" width="1000" height="680" loading="lazy"><figcaption>安装好之后的样子</figcaption></figure>
+<p>左右滑卡片切换账号，点“+”加一个邮箱或手机号，再把它绑过的 App 点一点就记好了。具体功能可以看<a href="https://huichen.dev/2026/11/20/technology/%E6%88%91%E5%81%9A%E4%BA%86%E4%B8%80%E4%B8%AA%E8%AE%B0%E8%B4%A6%E5%8F%B7%E7%9A%84App%EF%BC%9A%E8%B4%A6%E5%8F%B7%E6%98%9F%E5%9B%BEAtlas/">上一篇</a>。</p>
+
+<h2 id="faq">常见问题</h2>
+<div class="faq">
+<p><strong>安装失败 / 提示“解析包出错”？</strong>多半是没下载完整。删掉重新下载一次，换个浏览器下也行。如果手机上之前装过别人改过签名的版本，先卸载再装。</p>
+<p><strong>提示“有风险”“可能是病毒”，能装吗？</strong>能。系统对所有不是应用商店来的 APK 都会这么说。Atlas 只申请了联网（只用于你自己开启的加密同步）和振动两个权限，不读通讯录、不读短信。官方安装包只在 <a href="https://github.com/Ckxkx/account-atlas/releases/latest">GitHub Releases</a> 和本站发布，别处下载的（尤其是收费的）都不是官方包，不要装。</p>
+<p><strong>iPhone 版过了 7 天打不开了？</strong>这是免费 Apple ID 签名的限制，不是 App 坏了。重新签名覆盖安装，数据都在；或者用 SideStore 自动续签。实在嫌烦，就用方法一的网页版，永远不过期。</p>
+<p><strong>数据会不会丢？存在哪？</strong>数据只存在你自己的手机里，我没有服务器，也看不到你的数据。覆盖安装、重签都不会丢；但<strong>卸载 App 会把数据一起删掉</strong>。所以换手机或卸载前，记得在设置里点 <strong>“导出备份”</strong> 存一份 JSON，到新设备再导入就行。想多设备自动同步，可以开 Gist 加密同步。</p>
+</div>
+
+<hr>
+<p>装的时候卡在哪一步，评论区告诉我，我把这篇补全 👇</p>
+</article>
+
+<footer>作者 朱会琛 · 发布于 2026年11月20日 · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br>原文：<a href="https://huichen.dev/2026/11/20/technology/%E8%B4%A6%E5%8F%B7%E6%98%9F%E5%9B%BEAtlas%E5%AE%89%E8%A3%85%E5%9B%BE%E8%A7%A3%EF%BC%9A%E5%AE%89%E5%8D%93%E5%92%8CiPhone/">huichen.dev</a></footer>
+</div>
+</body>
+</html>
