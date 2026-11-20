@@ -11,95 +11,10 @@ layout: null
 <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#151517" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/assets/avatar.png">
-<style>
-:root{
-  --bg:#f5f6f8;--card:#ffffff;--text:#1d1d1f;--muted:#6e6e73;--line:#e8e8ed;
-  --accent:#2f6fed;--accent-2:#7b5cff;--accent-soft:#eef3ff;--tip:#fff8e6;--tip-line:#f2c94c;
-  --android:#20a464;--ios:#1d1d1f;--shadow:0 6px 24px rgba(20,30,60,.06);
-}
-@media (prefers-color-scheme:dark){
-  :root{--bg:#121214;--card:#1c1c1f;--text:#ececef;--muted:#9a9aa2;--line:#2c2c31;
-  --accent:#6b9bff;--accent-2:#a08bff;--accent-soft:#1b2438;--tip:#29241a;--tip-line:#a88a2c;
-  --android:#3ccf86;--ios:#ececef;--shadow:none;}
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
-  font-size:17px;line-height:1.9;letter-spacing:.015em}
-a{color:var(--accent);text-decoration:none;word-break:break-all}
-a:hover{text-decoration:underline}
-.wrap{max-width:780px;margin:0 auto;padding:0 18px}
-/* top bar */
-.topbar{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 82%,transparent);
-  backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
-.topbar .wrap{display:flex;align-items:center;gap:10px;height:52px;overflow-x:auto;scrollbar-width:none}
-.topbar .wrap::-webkit-scrollbar{display:none}
-.brand{font-weight:700;font-size:16px;white-space:nowrap;margin-right:auto;color:var(--text)}
-.pill{white-space:nowrap;font-size:14px;padding:5px 12px;border-radius:999px;color:var(--text);background:var(--card);border:1px solid var(--line)}
-.pill:hover{text-decoration:none;border-color:var(--accent);color:var(--accent)}
-/* hero */
-header.hero{padding:52px 0 26px;text-align:center}
-.badge{display:inline-block;font-size:13px;color:var(--accent);background:var(--accent-soft);padding:4px 12px;border-radius:999px;margin-bottom:14px}
-h1{font-size:clamp(27px,6vw,40px);line-height:1.28;margin:0 0 12px;font-weight:800;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.meta{color:var(--muted);font-size:14px}
-.choose{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0 6px;text-align:left}
-.choose a{display:block;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);color:var(--text);transition:transform .15s,border-color .15s}
-.choose a:hover{text-decoration:none;transform:translateY(-2px);border-color:var(--accent)}
-.choose .ico{font-size:28px;line-height:1}
-.choose b{display:block;font-size:18px;margin:8px 0 2px}
-.choose span{font-size:14px;color:var(--muted);line-height:1.6}
-/* article */
-article{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);
-  padding:clamp(22px,5vw,48px);margin-bottom:28px}
-h2{font-size:25px;margin:2.4em 0 .8em;padding:14px 18px;border-radius:14px;background:var(--accent-soft);scroll-margin-top:66px;line-height:1.4}
-h2#android::before{content:"🤖 "}
-h2#iPhone::before{content:"📱 "}
-h3{font-size:19px;margin:2em 0 .5em;padding-left:12px;border-left:4px solid var(--accent);line-height:1.5;scroll-margin-top:66px}
-h4{font-size:17px;margin:1.8em 0 .4em;padding-left:10px;border-left:3px solid var(--accent-2);line-height:1.5;scroll-margin-top:66px}
-p{margin:.75em 0}
-ul{padding-left:1.3em;margin:.7em 0}
-li{margin:.35em 0}
-li::marker{color:var(--accent)}
-strong{font-weight:650}
-code{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:.88em;background:var(--accent-soft);padding:.12em .45em;border-radius:6px}
-figure{margin:1.3em auto 1.8em;max-width:640px}
-figure img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);background:var(--bg);box-shadow:var(--shadow)}
-figcaption{text-align:center;color:var(--muted);font-size:13px;margin-top:10px}
-blockquote{margin:1.5em 0;padding:14px 18px;background:var(--tip);border-left:4px solid var(--tip-line);border-radius:12px;font-size:16px}
-blockquote p{margin:0}
-.dl{margin:1.2em 0 1.8em;padding:22px 18px;border-radius:18px;text-align:center;
-  background:linear-gradient(135deg,var(--accent-soft),color-mix(in srgb,var(--accent-2) 12%,var(--card)))}
-.btn{display:inline-block;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:600;padding:13px 24px;border-radius:999px;font-size:16px;line-height:1.4;box-shadow:0 6px 18px rgba(47,111,237,.28);word-break:normal}
-.btn:hover{text-decoration:none;filter:brightness(1.05)}
-.dl small{display:block;color:var(--muted);font-size:13px;margin-top:12px;line-height:1.7}
-.table-wrap{overflow-x:auto;margin:1em 0;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:14px}
-table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}
-th,td{border-bottom:1px solid var(--line);padding:11px 14px;text-align:left;vertical-align:top;line-height:1.6}
-tr:last-child th,tr:last-child td{border-bottom:0}
-thead th{background:var(--accent-soft);font-weight:650}
-tbody th{font-weight:600;white-space:nowrap;color:var(--muted)}
-.faq p{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin:12px 0;font-size:16px}
-.faq p strong:first-child{display:block;margin-bottom:4px;font-size:17px}
-hr{border:0;border-top:1px dashed var(--line);margin:2.2em 0}
-footer{color:var(--muted);font-size:13px;text-align:center;padding:0 0 44px;line-height:1.8}
-.totop{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom));width:44px;height:44px;border-radius:50%;
-  display:grid;place-items:center;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);color:var(--text);font-size:18px;opacity:0;pointer-events:none;transition:opacity .2s}
-.totop.show{opacity:1;pointer-events:auto}
-.totop:hover{text-decoration:none}
-@media (max-width:560px){
-  body{font-size:16px}
-  header.hero{padding:34px 0 18px}
-  .choose{gap:10px}.choose a{padding:14px}.choose b{font-size:16px}
-  article{border-radius:18px;padding:20px 16px}
-  h2{font-size:21px;padding:12px 14px}
-  .btn{padding:12px 18px;font-size:15px}
-}
-</style>
+<link rel="stylesheet" href="/assets/tutorial.css">
 </head>
 <body>
-<nav class="topbar"><div class="wrap"><a class="brand" href="#top">账号星图 Atlas</a><a class="pill" href="#android">安卓</a><a class="pill" href="#iPhone">iPhone</a><a class="pill" href="#faq">常见问题</a></div></nav>
+<nav class="topbar"><div class="wrap"><a class="brand" href="#top">账号星图 Atlas</a><a class="pill" href="#android">安卓</a><a class="pill" href="#iPhone">iPhone</a><a class="pill" href="#faq">常见问题</a><a class="pill" href="/sidestore/">SideStore</a><a class="pill" href="#contact">联系我</a></div></nav>
 <div class="wrap" id="top">
 <header class="hero">
   <div class="badge">安装教程</div>
@@ -214,6 +129,15 @@ footer{color:var(--muted);font-size:13px;text-align:center;padding:0 0 44px;line
 </div>
 
 </article>
+
+<a class="related" href="/sidestore/"><div class="ico">🔄</div><div><b>不想每 7 天重签？</b><span>看这篇：用 SideStore 在手机上自动续签</span></div></a>
+
+<section class="contact" id="contact"><article>
+<h2>联系我</h2>
+<img src="/assets/douyin-card.webp" alt="抖音名片：@阿chen，抖音号 chenai0874" width="600" height="896" loading="lazy">
+<p class="handle">抖音 @阿chen · 抖音号 chenai0874</p>
+<a class="gh" href="https://github.com/Ckxkx"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub · Ckxkx</a>
+</article></section>
 
 <footer>作者 朱会琛 · 发布于 2026年11月20日 · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a><br>原文：<a href="https://huichen.dev/2026/11/20/technology/%E8%B4%A6%E5%8F%B7%E6%98%9F%E5%9B%BEAtlas%E5%AE%89%E8%A3%85%E5%9B%BE%E8%A7%A3%EF%BC%9A%E5%AE%89%E5%8D%93%E5%92%8CiPhone/">huichen.dev</a></footer>
 </div>
