@@ -17,7 +17,7 @@
 
 ## 下载
 
-- GitHub Releases：<https://github.com/Ckxkx/account-atlas/releases>
+- GitHub Releases：<https://github.com/Ckxkx/account-atlas/releases/latest>
 - 百度网盘：<https://pan.baidu.com/s/1Mj6ptXplG6Qm_kDFKT_gNQ?pwd=xM2H>
 - 网页版：<https://huichen.dev/account-atlas/>
 
