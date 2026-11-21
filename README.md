@@ -40,6 +40,6 @@ downloads/            安装包镜像 Atlas.apk / Atlas.ipa（发新版时替换
 
 ## 反馈
 
-问题和建议请提到 Atlas 仓库的 [Issues](https://github.com/Ckxkx/account-atlas/issues)。
+问题和建议请提到 Atlas 仓库的 [Issues](https://github.com/Ckxkx/account-atlas/issues)，或加入 QQ 交流群：1063129927。
 
 © 2026 Ckxkx（阿chen）
