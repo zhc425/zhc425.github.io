@@ -17,6 +17,7 @@
 
 ## 下载
 
+- 本站直链：<https://zhc425.github.io/downloads/Atlas.apk> · <https://zhc425.github.io/downloads/Atlas.ipa>（当前 v2.1）
 - GitHub Releases：<https://github.com/Ckxkx/account-atlas/releases/latest>
 - 百度网盘：<https://pan.baidu.com/s/1Mj6ptXplG6Qm_kDFKT_gNQ?pwd=xM2H>
 - 网页版：<https://huichen.dev/account-atlas/>
@@ -32,6 +33,7 @@ sidestore/index.html  SideStore 续签教程
 faq/index.html        常见问题
 assets/site-atlas.css 全站样式
 assets/atlas/         图标、截图、功能演示
+downloads/            安装包镜像 Atlas.apk / Atlas.ipa（发新版时替换）
 ```
 
 纯静态 HTML，推送到 `main` 后由 GitHub Actions 自动部署到 GitHub Pages。
