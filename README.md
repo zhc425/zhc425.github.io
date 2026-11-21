@@ -1,40 +1,43 @@
-# zhc425 的动态空间
+# 账号星图 Atlas · 官方网站
 
-使用 Jekyll 和 GitHub Pages，所有内容保存在 `_posts` 中。
+<p>
+  <a href="https://zhc425.github.io/"><b>https://zhc425.github.io</b></a>
+</p>
 
-## 发布短动态
+这是开源项目 [账号星图 Atlas](https://github.com/Ckxkx/account-atlas) 的官方站点源码。Atlas 帮你记清每个邮箱、手机号注册 / 绑定了哪些网站和 App，网页、iOS、安卓三端可用，永久免费。
 
-新建 `_posts/2026-11-05-a-small-note.md`。短动态不需要标题，正文支持 Markdown 和图片：
+## 站点页面
 
-```markdown
----
-type: note
-date: 2026-11-05
-category: 碎碎念
----
+| 页面 | 地址 | 内容 |
+|---|---|---|
+| 首页 | [/](https://zhc425.github.io/) | 项目介绍、三端下载、功能演示 |
+| 安装指南 | [/guide/](https://zhc425.github.io/guide/) | 安卓 APK 与 iPhone（网页版 / IPA 自签）图解安装 |
+| SideStore 续签 | [/sidestore/](https://zhc425.github.io/sidestore/) | 用 SideStore 安装 IPA 并在手机上自动续签 |
+| 常见问题 | [/faq/](https://zhc425.github.io/faq/) | 安装、签名、续签、数据备份 |
 
-今天想记录的一句话。
+## 下载
 
-也可以写第二段。
+- GitHub Releases：<https://github.com/Ckxkx/account-atlas/releases>
+- 百度网盘：<https://pan.baidu.com/s/1Mj6ptXplG6Qm_kDFKT_gNQ?pwd=xM2H>
+- 网页版：<https://huichen.dev/account-atlas/>
+
+官方安装包只从 GitHub Releases 和 huichen.dev 发布，App 永久免费，任何收费渠道都不是官方的。
+
+## 目录结构
+
+```
+index.html            首页
+guide/index.html      安装指南
+sidestore/index.html  SideStore 续签教程
+faq/index.html        常见问题
+assets/site-atlas.css 全站样式
+assets/atlas/         图标、截图、功能演示
 ```
 
-日期也可写成 `2026-11-05 14:30:00 +0800`。默认分类是碎碎念，日期必须与文件名的日期一致；文件名末尾使用唯一的英文短链接。
+纯静态 HTML，推送到 `main` 后由 GitHub Actions 自动部署到 GitHub Pages。
 
-## 发布长文章
+## 反馈
 
-```markdown
----
-title: 一本书读完之后
-date: 2026-11-05
-category: 读书
-summary: 这里写一段简短摘要。
----
+问题和建议请提到 Atlas 仓库的 [Issues](https://github.com/Ckxkx/account-atlas/issues)。
 
-这里是文章正文。
-```
-
-不设置 `type: note` 即按长文章展示。已有文章不受影响。发布后保留文件名，永久链接即可保持稳定。分类可以自由添加，首页 Tab 固定显示常用分类，其他分类可在分类页面查找。图片放在 `assets/images/`，写作 `![图片说明](/assets/images/example.jpg)`。
-
-## 预览与发布
-
-安装 Ruby 和 Bundler 后运行 `bundle install`、`bundle exec jekyll serve`。将变更推送到 GitHub 的 `main` 分支后，GitHub Actions 会构建并部署；Pages 发布来源应选择 GitHub Actions。工作流位于 `.github/workflows/pages.yml`。
+© 2026 Ckxkx（阿chen）

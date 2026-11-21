@@ -1,6 +1,0 @@
----
-layout: default
-title: 归档
-permalink: /archive/
----
-<section class="page"><h1>归档</h1><p class="muted">按时间回看留下的内容。</p>{% assign years = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}{% for year in years %}<section class="archive-year"><h2>{{ year.name }}</h2>{% assign months = year.items | group_by_exp: "post", "post.date | date: '%m'" %}{% for month in months %}<h3>{{ month.name | plus: 0 }}月</h3>{% for post in month.items %}<div class="archive-row"><time>{{ post.date | date: '%d' }}日</time><a href="{{ post.url | relative_url }}">{% if post.type == 'note' %}{{ post.content | strip_html | truncate: 55 }}{% else %}{{ post.title | escape }}{% endif %}</a></div>{% endfor %}{% endfor %}</section>{% endfor %}</section>

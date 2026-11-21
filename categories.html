@@ -1,6 +1,0 @@
----
-layout: default
-title: 分类
-permalink: /categories/
----
-<section class="page"><h1>分类</h1><p class="muted">按主题浏览。</p>{% assign groups = site.posts | group_by: 'category' %}{% for group in groups %}<section class="archive-year"><h2>{{ group.name | escape }}</h2>{% for post in group.items %}<div class="archive-row"><time>{{ post.date | date: '%m.%d' }}</time><a href="{{ post.url | relative_url }}">{% if post.type == 'note' %}{{ post.content | strip_html | truncate: 55 }}{% else %}{{ post.title | escape }}{% endif %}</a></div>{% endfor %}</section>{% endfor %}</section>
