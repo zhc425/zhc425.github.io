@@ -1,0 +1,80 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>常见问题 · 账号星图 Atlas</title>
+<meta name="description" content="账号星图 Atlas 安装与使用常见问题。">
+<meta property="og:title" content="常见问题 · 账号星图 Atlas">
+<meta property="og:description" content="账号星图 Atlas 安装与使用常见问题。">
+<meta property="og:image" content="https://zhc425.github.io/assets/atlas/icon-192.png">
+<link rel="icon" href="/assets/atlas/favicon.png">
+<link rel="apple-touch-icon" href="/assets/atlas/icon-192.png">
+<link rel="stylesheet" href="/assets/site-atlas.css">
+</head>
+<body>
+<header class="hdr"><div class="hdr-in">
+  <a class="logo" href="/"><img src="/assets/atlas/icon-192.png" alt="" width="28" height="28">账号星图 Atlas</a>
+  <nav class="nav"><a href="/">首页</a><a href="/guide/">安装指南</a><a href="/sidestore/">SideStore 续签</a><a href="/faq/" class="on">常见问题</a></nav>
+  <a class="hdr-gh" href="https://github.com/Ckxkx/account-atlas" aria-label="GitHub 仓库"><svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+</div></header>
+<div class="doc">
+  <aside class="toc toc-d"><div class="toc-t">本页目录</div><ul><li class="l2"><a href="#install">安装 Atlas</a></li><li class="l3"><a href="#q1">安装失败 / 提示“解析包出错”？</a></li><li class="l3"><a href="#q2">提示“有风险”“可能是病毒”，能装吗？</a></li><li class="l3"><a href="#q3">iPhone 版过了 7 天打不开了？</a></li><li class="l3"><a href="#q4">数据会不会丢？存在哪？</a></li><li class="l2"><a href="#sidestore">SideStore 自签与续签</a></li><li class="l3"><a href="#s1">能装几个 App？</a></li><li class="l3"><a href="#s2">SideStore 登录 Apple ID 报错？</a></li><li class="l3"><a href="#s3">账号里多了一台 iMac / MacBook，安全吗？</a></li><li class="l3"><a href="#s4">升级 iOS 或还原手机后不能续签了？</a></li><li class="l3"><a href="#s5">之前用爱思 / Sideloadly 装的 Atlas 怎么办？</a></li></ul></aside>
+  <main class="doc-main">
+    <div class="crumb"><a href="/">首页</a> / 文档</div>
+    <h1>常见问题</h1>
+    <p class="lead">安装、签名、续签和数据备份中最常遇到的问题。</p>
+    <div class="doc-meta">没有找到答案？欢迎在 <a href="https://github.com/Ckxkx/account-atlas/issues">GitHub Issues</a> 提问。</div>
+    <details class="toc toc-m"><summary>本页目录</summary><ul><li class="l2"><a href="#install">安装 Atlas</a></li><li class="l3"><a href="#q1">安装失败 / 提示“解析包出错”？</a></li><li class="l3"><a href="#q2">提示“有风险”“可能是病毒”，能装吗？</a></li><li class="l3"><a href="#q3">iPhone 版过了 7 天打不开了？</a></li><li class="l3"><a href="#q4">数据会不会丢？存在哪？</a></li><li class="l2"><a href="#sidestore">SideStore 自签与续签</a></li><li class="l3"><a href="#s1">能装几个 App？</a></li><li class="l3"><a href="#s2">SideStore 登录 Apple ID 报错？</a></li><li class="l3"><a href="#s3">账号里多了一台 iMac / MacBook，安全吗？</a></li><li class="l3"><a href="#s4">升级 iOS 或还原手机后不能续签了？</a></li><li class="l3"><a href="#s5">之前用爱思 / Sideloadly 装的 Atlas 怎么办？</a></li></ul></details>
+    <div class="prose faq-page">
+<h2 id="install">安装 Atlas</h2>
+<h3 id="q1">安装失败 / 提示“解析包出错”？</h3>
+<p>多半是没下载完整。删掉重新下载一次，换个浏览器下也行。如果手机上之前装过别人改过签名的版本，先卸载再装。</p>
+<h3 id="q2">提示“有风险”“可能是病毒”，能装吗？</h3>
+<p>能。系统对所有不是应用商店来的 APK 都会这么说。Atlas 只申请了联网（只用于你自己开启的加密同步）和振动两个权限，不读通讯录、不读短信。官方安装包只在 <a href="https://github.com/Ckxkx/account-atlas/releases">GitHub Releases</a> 和本站发布，别处下载的（尤其是收费的）都不是官方包，不要装。</p>
+<h3 id="q3">iPhone 版过了 7 天打不开了？</h3>
+<p>这是免费 Apple ID 签名的限制，不是 App 坏了。重新签名覆盖安装，数据都在；或者用 SideStore 自动续签。实在嫌烦，就用方法一的网页版，永远不过期。</p>
+<h3 id="q4">数据会不会丢？存在哪？</h3>
+<p>数据只存在你自己的手机里，我没有服务器，也看不到你的数据。覆盖安装、重签都不会丢；但<strong>卸载 App 会把数据一起删掉</strong>。所以换手机或卸载前，记得在设置里点 <strong>“导出备份”</strong> 存一份 JSON，到新设备再导入就行。想多设备自动同步，可以开 Gist 加密同步。</p>
+<p>完整步骤见 <a href="/guide/">安装指南</a>。</p>
+<h2 id="sidestore">SideStore 自签与续签</h2>
+<h3 id="s1">能装几个 App？</h3>
+<p>免费 Apple ID 同时最多 3 个（SideStore 自己算一个），而且一周内最多签 10 个不同的 App。所以装了 SideStore 和 Atlas 后，还能再装 1 个。</p>
+<h3 id="s2">SideStore 登录 Apple ID 报错？</h3>
+<p>最常见是 Anisette 服务器临时挂了。去 SideStore 的设置里，把 “Anisette URL” 换一个官方服务器再试。</p>
+<h3 id="s3">账号里多了一台 iMac / MacBook，安全吗？</h3>
+<p>那是 Anisette 服务器为了辅助登录生成的虚拟设备，不是真的 Mac，不会上传你的隐私数据。</p>
+<h3 id="s4">升级 iOS 或还原手机后不能续签了？</h3>
+<p>配对文件可能失效了，需要按官方的 <a href="https://docs.sidestore.io/docs/advanced/pairing-file">Pairing File 教程</a>重新生成一次。</p>
+<h3 id="s5">之前用爱思 / Sideloadly 装的 Atlas 怎么办？</h3>
+<p>不用卸载。直接在 SideStore 里用“+”装一遍同样或更新的 IPA，它会接管这个 App，数据保留。</p>
+<p>完整步骤见 <a href="/sidestore/">SideStore 续签教程</a>；更多细节可以看 <a href="https://docs.sidestore.io/zh/docs/installation/prerequisites">SideStore 官方中文文档</a>。</p>
+    </div>
+    <section class="contact" id="contact">
+  <img src="/assets/douyin-card.webp" alt="抖音名片：@阿chen，抖音号 chenai0874" width="600" height="896" loading="lazy">
+  <div>
+    <h2>联系作者</h2>
+    <p>使用中遇到问题、想要新功能，欢迎在 GitHub 提 Issue，或者抖音扫码找我。</p>
+    <dl><dt>抖音</dt><dd>@阿chen · 抖音号 chenai0874</dd><dt>GitHub</dt><dd><a href="https://github.com/Ckxkx">github.com/Ckxkx</a></dd></dl>
+    <a class="btn btn-2" href="https://github.com/Ckxkx/account-atlas/issues">提交 Issue</a>
+  </div>
+</section>
+  </main>
+</div>
+<footer class="ftr"><div class="ftr-in">
+  <div><strong>账号星图 Atlas</strong><br>记清每个邮箱、手机号注册 / 绑定了哪些网站和 App。</div>
+  <div class="ftr-links"><a href="https://github.com/Ckxkx/account-atlas">源代码</a><a href="https://github.com/Ckxkx/account-atlas/releases">版本发布</a><a href="https://github.com/Ckxkx/account-atlas/issues">问题反馈</a><a href="https://huichen.dev/account-atlas/">在线使用</a></div>
+  <div class="ftr-copy">© 2026 Ckxkx（阿chen）· 代码采用 <a href="https://github.com/Ckxkx/account-atlas/blob/main/LICENSE">GPL-3.0</a> 许可 · 官方安装包只在 GitHub Releases 和 huichen.dev 发布，App 永久免费</div>
+</div></footer>
+<script>
+document.querySelectorAll('.toc-m a').forEach(a=>a.addEventListener('click',()=>document.querySelector('.toc-m').removeAttribute('open')));
+const links=[...document.querySelectorAll('.toc-d a')];
+if(links.length){const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('on'));map.get(e.target.id)?.classList.add('on');}})},{rootMargin:'-70px 0px -70% 0px'});
+map.forEach((a,id)=>{const el=document.getElementById(id);el&&io.observe(el)});}
+</script>
+</body>
+</html>
