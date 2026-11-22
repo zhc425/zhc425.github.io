@@ -17,7 +17,7 @@
 
 ## 下载
 
-- 本站直链：<https://zhc425.github.io/downloads/Atlas.apk> · <https://zhc425.github.io/downloads/Atlas.ipa>（当前 v2.1）
+- 本站直链：<https://zhc425.github.io/downloads/Atlas.apk> · <https://zhc425.github.io/downloads/Atlas.ipa>（当前 v2.2）
 - GitHub Releases：<https://github.com/Ckxkx/account-atlas/releases/latest>
 - 百度网盘：<https://pan.baidu.com/s/1aHU-gsFDPz1h9behQPqvLw?pwd=0874>
 - 网页版：<https://huichen.dev/account-atlas/>
