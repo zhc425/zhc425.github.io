@@ -18,7 +18,7 @@
 ## 下载
 
 <!-- downloads:start -->
-- 百度网盘：<https://pan.baidu.com/s/1aHU-gsFDPz1h9behQPqvLw?pwd=0874>
+- 蓝奏云网盘（v2.2）：安卓 <https://wwbsj.lanzoup.com/iTS2v4h3ei4b> · iPhone <https://wwbsj.lanzoup.com/ibSnA4h3eicj>
 - GitHub Releases：<https://github.com/Ckxkx/account-atlas/releases/latest>
 <!-- downloads:end -->
 - 网页版：<https://huichen.dev/account-atlas/>
