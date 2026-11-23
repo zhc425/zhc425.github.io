@@ -17,7 +17,10 @@ import sys
 import time
 from pathlib import Path
 
+import functools
 import requests
+
+print = functools.partial(print, flush=True)  # noqa: A001  实时输出日志
 
 REPO = os.environ.get("ATLAS_REPO", "Ckxkx/account-atlas")
 ROOT = Path(__file__).resolve().parents[2]
@@ -113,7 +116,12 @@ class Lanzou:
             res = self.api({"task": 5, "folder_id": folder, "pg": pg})
             if not res.get("info"):
                 break
-            out_ += res.get("text") or []
+            batch = res.get("text") or []
+            if not isinstance(batch, list) or not batch:
+                break
+            out_ += batch
+            if len(batch) < 18 or pg >= 20:
+                break
             pg += 1
         return out_
 
@@ -126,10 +134,10 @@ class Lanzou:
         name = path.name
         for attempt in range(3):
             with open(path, "rb") as fh:
-                r = self.s.post(f"{LZ}/fileup.php?uid={self.uid}", data={
+                r = self.s.post(f"{LZ}/html5up.php", data={
                     "task": "1", "vie": "2", "ve": "2", "id": "WU_FILE_0",
                     "folder_id_bb_n": folder, "name": name,
-                }, files={"upload_file": (name, fh, "application/octet-stream")}, timeout=600)
+                }, files={"upload_file": (name, fh, "application/octet-stream")}, timeout=180)
             try:
                 res = r.json()
             except ValueError:
