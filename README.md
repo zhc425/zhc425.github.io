@@ -17,9 +17,10 @@
 
 ## 下载
 
-- 本站直链：<https://zhc425.github.io/downloads/Atlas.apk> · <https://zhc425.github.io/downloads/Atlas.ipa>（当前 v2.2）
-- GitHub Releases：<https://github.com/Ckxkx/account-atlas/releases/latest>
+<!-- downloads:start -->
 - 百度网盘：<https://pan.baidu.com/s/1aHU-gsFDPz1h9behQPqvLw?pwd=0874>
+- GitHub Releases：<https://github.com/Ckxkx/account-atlas/releases/latest>
+<!-- downloads:end -->
 - 网页版：<https://huichen.dev/account-atlas/>
 
 官方安装包只从 GitHub Releases 和 huichen.dev 发布，App 永久免费，任何收费渠道都不是官方的。
@@ -33,10 +34,20 @@ sidestore/index.html  SideStore 续签教程
 faq/index.html        常见问题
 assets/site-atlas.css 全站样式
 assets/atlas/         图标、截图、功能演示
-downloads/            安装包镜像 Atlas.apk / Atlas.ipa（发新版时替换）
+.github/scripts/       发版同步脚本（GitHub 新 Release → 蓝奏云 → 站点链接）
 ```
 
 纯静态 HTML，推送到 `main` 后由 GitHub Actions 自动部署到 GitHub Pages。
+
+## 发版自动同步
+
+`.github/workflows/sync-release.yml` 每 15 分钟检查一次 [Ckxkx/account-atlas](https://github.com/Ckxkx/account-atlas) 的最新 Release，发现新版本时：
+
+1. 下载 Release 里的 `Atlas.apk` 和 `Atlas.ipa`；
+2. 删掉蓝奏云「Atlas」文件夹里的旧安装包，上传新包，取得分享链接；
+3. 更新站点上的版本号、安装包大小和蓝奏云链接，提交并重新部署。
+
+需要的仓库 Secrets：`LANZOU_YLOGIN`、`LANZOU_PHPDISK_INFO`（蓝奏云登录 Cookie）。可选 Variable：`LANZOU_FOLDER_ID`（不填则自动使用 / 创建名为 Atlas 的文件夹）。在 Actions 页手动运行并勾选 force 可强制重新同步。
 
 ## 反馈
 

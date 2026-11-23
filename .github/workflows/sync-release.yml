@@ -1,0 +1,50 @@
+name: Sync Atlas release to Lanzou
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "强制重新上传并更新链接"
+        type: boolean
+        default: false
+  repository_dispatch:
+    types: [atlas-release]
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: sync-release
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - id: sync
+        run: python .github/scripts/sync_release.py
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LANZOU_YLOGIN: ${{ secrets.LANZOU_YLOGIN }}
+          LANZOU_PHPDISK_INFO: ${{ secrets.LANZOU_PHPDISK_INFO }}
+          LANZOU_FOLDER_ID: ${{ vars.LANZOU_FOLDER_ID }}
+          FORCE: ${{ inputs.force }}
+      - if: steps.sync.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Atlas ${{ steps.sync.outputs.tag }}：同步蓝奏云下载链接"
+          git push
+          # GITHUB_TOKEN 的 push 不会触发其他工作流，这里手动触发部署
+          gh workflow run pages.yml --ref main
+        env:
+          GH_TOKEN: ${{ github.token }}
