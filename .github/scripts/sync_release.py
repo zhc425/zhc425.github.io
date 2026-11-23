@@ -180,7 +180,7 @@ def update_site(tag, urls, sizes, pwd):
         p = ROOT / rel
         s = p.read_text(encoding="utf-8")
         for k in ASSETS:
-            s = re.sub(rf'data-dl="{k}" href="[^"]*"', f'data-dl="{k}" href="{urls[k]}"', s)
+            s = re.sub(rf'(data-dl="{k}"[^>]*? href=")[^"]*"', rf'\g<1>{urls[k]}"', s)
             s = re.sub(rf'<span data-size="{k}">[^<]*</span>', f'<span data-size="{k}">{fmt_size(sizes[k])}</span>', s)
         s = re.sub(r"<span data-ver>[^<]*</span>", f"<span data-ver>{tag}</span>", s)
         s = re.sub(r"<span data-host>[^<]*</span>", "<span data-host>蓝奏云网盘</span>", s)
