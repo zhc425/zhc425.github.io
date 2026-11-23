@@ -75,9 +75,13 @@ class Lanzou:
         self.s.cookies.set("phpdisk_info", phpdisk_info, domain=".woozooo.com")
 
     def check_login(self):
-        r = self.s.get(f"{LZ}/account.php", timeout=30)
-        if "网盘用户登录" in r.text or r.status_code != 200:
+        try:
+            res = self.api({"task": 47, "folder_id": -1})
+        except Exception as e:  # noqa: BLE001
+            fail(f"连接蓝奏云失败：{e}")
+        if res.get("zt") == 9 or res.get("info") == "login not":
             fail("蓝奏云 Cookie 已失效：请重新登录蓝奏云，把新的 ylogin / phpdisk_info 更新到仓库 Secrets。")
+        print(f"蓝奏云登录正常（zt={res.get('zt')}）")
 
     def api(self, data):
         r = self.s.post(f"{LZ}/doupload.php?uid={self.uid}", data=data, timeout=60)
