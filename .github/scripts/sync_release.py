@@ -149,23 +149,33 @@ class Lanzou:
         fail(f"上传 {name} 到蓝奏云失败")
 
     def share_url(self, file_id):
-        # 关闭提取码，再取分享链接
-        self.api({"task": 23, "file_id": file_id, "shows": 0, "shownames": ""})
+        """返回 (分享链接, 提取码)。先尝试关闭提取码；账号不允许关闭时统一设成 LZ_PWD。"""
+        r = self.api({"task": 23, "file_id": file_id, "shows": 0, "shownames": ""})
+        print(f"关闭提取码：{r}")
         info = self.api({"task": 22, "file_id": file_id}).get("info") or {}
+        if str(info.get("onof")) == "1":
+            r = self.api({"task": 23, "file_id": file_id, "shows": 1, "shownames": LZ_PWD})
+            print(f"设置统一提取码：{r}")
+            info = self.api({"task": 22, "file_id": file_id}).get("info") or {}
         if not info.get("f_id") or info.get("f_id") == "i":
             fail(f"取分享链接失败：{info}")
         host = info["is_newd"].rstrip("/")
         if not host.startswith("http"):
             host = "https://" + host
-        return f"{host}/{info['f_id']}"
+        pwd = info.get("pwd", "") if str(info.get("onof")) == "1" else ""
+        print(f"onof={info.get('onof')} pwd={pwd or '无'}")
+        return f"{host}/{info['f_id']}", pwd
 
 
 # ---------------- 站点 ----------------
+LZ_PWD = os.environ.get("LANZOU_PWD", "").strip() or "0874"
+
+
 def fmt_size(n):
     return f"{n / 1e6:.2f} MB"
 
 
-def update_site(tag, urls, sizes):
+def update_site(tag, urls, sizes, pwd):
     for rel in PAGES:
         p = ROOT / rel
         s = p.read_text(encoding="utf-8")
@@ -174,12 +184,14 @@ def update_site(tag, urls, sizes):
             s = re.sub(rf'<span data-size="{k}">[^<]*</span>', f'<span data-size="{k}">{fmt_size(sizes[k])}</span>', s)
         s = re.sub(r"<span data-ver>[^<]*</span>", f"<span data-ver>{tag}</span>", s)
         s = re.sub(r"<span data-host>[^<]*</span>", "<span data-host>蓝奏云网盘</span>", s)
+        s = re.sub(r'data-pwd="[^"]*"', f'data-pwd="{pwd}"', s)
+        s = re.sub(r"<b data-pwdtxt>[^<]*</b>", f"<b data-pwdtxt>{pwd or '无需密码'}</b>", s)
         p.write_text(s, encoding="utf-8")
 
     readme = ROOT / "README.md"
     s = readme.read_text(encoding="utf-8")
     block = ("<!-- downloads:start -->\n"
-             f"- 蓝奏云网盘（{tag}）：安卓 <{urls['apk']}> · iPhone <{urls['ipa']}>\n"
+             f"- 蓝奏云网盘（{tag}）：安卓 <{urls['apk']}> · iPhone <{urls['ipa']}>" + (f" · 密码 **{pwd}**" if pwd else "") + "\n"
              f"- GitHub Releases：<https://github.com/{REPO}/releases/latest>\n"
              "<!-- downloads:end -->")
     s = re.sub(r"<!-- downloads:start -->.*?<!-- downloads:end -->", block, s, flags=re.S)
@@ -227,14 +239,17 @@ def main():
             print(f"删除旧文件：{f['name_all']}")
             lz.delete(f["id"])
 
-    urls = {}
+    urls, pwds = {}, {}
     for k in ASSETS:
         fid = lz.upload(paths[k], folder)
-        urls[k] = lz.share_url(fid)
+        urls[k], pwds[k] = lz.share_url(fid)
         print(f"{k} → {urls[k]}")
 
-    update_site(tag, urls, sizes)
-    STATE.write_text(json.dumps({"tag": tag, "apk_url": urls["apk"], "ipa_url": urls["ipa"],
+    pwd = pwds["apk"] or pwds["ipa"]
+    if pwds["apk"] != pwds["ipa"]:
+        print(f"::warning::两个文件提取码不同：{pwds}")
+    update_site(tag, urls, sizes, pwd)
+    STATE.write_text(json.dumps({"tag": tag, "apk_url": urls["apk"], "ipa_url": urls["ipa"], "pwd": pwd,
                                  "apk_size": sizes["apk"], "ipa_size": sizes["ipa"],
                                  "folder_id": folder}, ensure_ascii=False, indent=2) + "\n")
     for p in paths.values():

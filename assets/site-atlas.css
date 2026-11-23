@@ -183,3 +183,12 @@ img{max-width:100%}
 /* FAQ page */
 .faq-page h3{font-size:17px;margin:28px 0 6px;padding-left:12px;border-left:3px solid var(--brand);line-height:1.5}
 .faq-page h3+p{margin-top:0;color:var(--text)}
+
+/* 蓝奏云提取码 */
+.lz-pwd{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:10px 0;padding:8px 12px;border:1px dashed var(--brand);border-radius:6px;background:var(--brand-soft);font-size:14px;color:var(--text)}
+.lz-pwd b{font-size:18px;letter-spacing:2px;color:var(--brand);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.lz-copy{border:1px solid var(--brand);background:var(--bg);color:var(--brand);border-radius:4px;padding:2px 10px;font-size:13px;cursor:pointer}
+.lz-copy:hover{background:var(--brand);color:var(--brand-ink)}
+.lz-tip{color:var(--muted,#888);font-size:12px}
+.lz-toast{position:fixed;left:50%;bottom:32px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:rgba(20,20,20,.88);color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;transition:.25s;z-index:999}
+.lz-toast.on{opacity:1;transform:translate(-50%,0)}
