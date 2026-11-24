@@ -132,20 +132,23 @@ class Lanzou:
 
     def upload(self, path, folder):
         name = path.name
-        for attempt in range(3):
-            with open(path, "rb") as fh:
-                r = self.s.post(f"{LZ}/html5up.php", data={
-                    "task": "1", "vie": "2", "ve": "2", "id": "WU_FILE_0",
-                    "folder_id_bb_n": folder, "name": name,
-                }, files={"upload_file": (name, fh, "application/octet-stream")}, timeout=180)
+        for attempt in range(5):
             try:
-                res = r.json()
-            except ValueError:
-                res = {"raw": r.text[:300]}
+                with open(path, "rb") as fh:
+                    r = self.s.post(f"{LZ}/html5up.php", data={
+                        "task": "1", "vie": "2", "ve": "2", "id": "WU_FILE_0",
+                        "folder_id_bb_n": folder, "name": name,
+                    }, files={"upload_file": (name, fh, "application/octet-stream")}, timeout=(30, 600))
+                try:
+                    res = r.json()
+                except ValueError:
+                    res = {"raw": r.text[:300]}
+            except requests.RequestException as e:
+                res = {"error": repr(e)[:300]}
             if res.get("zt") == 1:
                 return str(res["text"][0]["id"])
             print(f"::warning::上传 {name} 第 {attempt + 1} 次失败：{res}")
-            time.sleep(10)
+            time.sleep(15 * (attempt + 1))
         fail(f"上传 {name} 到蓝奏云失败")
 
     def share_url(self, file_id):
@@ -237,17 +240,23 @@ def main():
     folder = lz.ensure_folder()
     print(f"蓝奏云文件夹 id：{folder}")
 
-    # 先删旧安装包（只删 .apk / .ipa）
-    for f in lz.files(folder):
-        if f.get("name_all", "").lower().endswith((".apk", ".ipa")):
-            print(f"删除旧文件：{f['name_all']}")
-            lz.delete(f["id"])
+    # 记下旧安装包，新包全部上传成功后再删，避免上传失败时官网链接失效
+    old_files = [f for f in lz.files(folder)
+                 if f.get("name_all", "").lower().endswith((".apk", ".ipa"))]
+    new_ids = set()
 
     urls, pwds = {}, {}
     for k in ASSETS:
         fid = lz.upload(paths[k], folder)
+        new_ids.add(str(fid))
         urls[k], pwds[k] = lz.share_url(fid)
         print(f"{k} → {urls[k]}")
+
+    for f in old_files:
+        if str(f.get("id")) in new_ids:
+            continue
+        print(f"删除旧文件：{f['name_all']}")
+        lz.delete(f["id"])
 
     pwd = pwds["apk"] or pwds["ipa"]
     if pwds["apk"] != pwds["ipa"]:
