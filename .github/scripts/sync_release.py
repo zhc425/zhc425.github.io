@@ -30,6 +30,7 @@ ASSETS = {"apk": "Atlas.apk", "ipa": "Atlas.ipa"}
 FORCE = os.environ.get("FORCE", "").lower() in ("1", "true", "yes")
 
 LZ = "https://pc.woozooo.com"
+LZ_UP = os.environ.get("LANZOU_UPLOAD_URL", "").strip() or "https://up.woozooo.com/html5up.php"  # pc 域名上传极慢，网页端实际也用 up 域名
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/120.0 Safari/537.36")
 
@@ -135,7 +136,7 @@ class Lanzou:
         for attempt in range(5):
             try:
                 with open(path, "rb") as fh:
-                    r = self.s.post(f"{LZ}/html5up.php", data={
+                    r = self.s.post(LZ_UP, data={
                         "task": "1", "vie": "2", "ve": "2", "id": "WU_FILE_0",
                         "folder_id_bb_n": folder, "name": name,
                     }, files={"upload_file": (name, fh, "application/octet-stream")}, timeout=(30, 600))
