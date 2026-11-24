@@ -18,7 +18,7 @@
 ## 下载
 
 <!-- downloads:start -->
-- 蓝奏云网盘（v2.3.2）：安卓 <https://wwbsj.lanzoup.com/i5agg4h6vsjg> · iPhone <https://wwbsj.lanzoup.com/izOul4h6vsli> · 密码 **0874**
+- 蓝奏云网盘（v2.3.3）：安卓 <https://wwbsj.lanzoup.com/i6s534h6xm8b> · iPhone <https://wwbsj.lanzoup.com/iJQCm4h6xq0h> · 密码 **0874**
 - GitHub Releases：<https://github.com/Ckxkx/account-atlas/releases/latest>
 <!-- downloads:end -->
 - 网页版：<https://huichen.dev/account-atlas/>
