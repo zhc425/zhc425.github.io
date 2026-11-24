@@ -139,7 +139,7 @@ class Lanzou:
                     r = self.s.post(LZ_UP, data={
                         "task": "1", "vie": "2", "ve": "2", "id": "WU_FILE_0",
                         "folder_id_bb_n": folder, "name": name,
-                    }, files={"upload_file": (name, fh, "application/octet-stream")}, timeout=(30, 600))
+                    }, files={"upload_file": (name, fh, "application/octet-stream")}, timeout=900)
                 try:
                     res = r.json()
                 except ValueError:
