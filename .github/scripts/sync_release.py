@@ -162,12 +162,16 @@ class Lanzou:
         host = info["is_newd"].rstrip("/")
         if not host.startswith("http"):
             host = "https://" + host
+        # 蓝奏云会轮换给 lanzn.com 等新域名，部分网络打不开；统一换成稳定的 LZ_DOMAIN
+        sub = re.sub(r"^https?://", "", host).split(".")[0]
+        host = f"https://{sub}.{LZ_DOMAIN}"
         pwd = info.get("pwd", "") if str(info.get("onof")) == "1" else ""
         print(f"onof={info.get('onof')} pwd={pwd or '无'}")
         return f"{host}/{info['f_id']}", pwd
 
 
 # ---------------- 站点 ----------------
+LZ_DOMAIN = os.environ.get("LANZOU_DOMAIN", "").strip() or "lanzoup.com"
 LZ_PWD = os.environ.get("LANZOU_PWD", "").strip() or "0874"
 
 
