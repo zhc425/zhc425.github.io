@@ -2,7 +2,7 @@ name: Sync Atlas release to Lanzou
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "17 1 * * *"   # 兜底：每天 09:17 北京时间检查一次；平时由 account-atlas 发版即时触发
   workflow_dispatch:
     inputs:
       force:
